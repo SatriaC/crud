@@ -1,64 +1,35 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+Tools yang digunakan:
+1. Visual Studio Code (Code Editor)
+2. Laragon (Web Server Lokal)
+3. Sqlyog (Aplikasi Client MySQL)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Langkah-langkah dalam membuat CRUD menggunakan laravel 8 secara simpel:
+1. Install project laravel di lokal
+   a. Buka Laragon
+   b. Klik Start All > Klik Kanan pada bagian dalam aplikasi > Klik Quick App > Klik Laravel 
+   c. Ketikkan nama project yang ingin dibuat > Klik Ok (Laragon akan langsung membuatkan project laravel 8 dan database mysql dengan nama yang sesuai diinputkan)
+2. Konfigurasi .env
+   a. Sesuaikan nama database sesuai dengan database yang telah dibuat
+   b. Username dan password disesuaikan dengan akun masing-masing. Adapun windows biasanya username diisi root, dan password dibiarkan kosong
+3. Buat tabel pada database di SQLyog. Dalam case ini, saya membuat crud data pegawai, sehingga saya menamai tabel saya dengan nama 'employees'. 
+   Note: 
+   a. Biasakan dalam membuat tabel dan komponennya menggunakan bahasa inggris
+   b. Karena tabel merupakan kumpulan dari beberapa data, maka biasakan dalam melakukan penamaan tabel selalu diakhiri dengan huruf 's' (jamak / plural)
+4. Proses Pembuatan Bagian Backend
+   a. Buat model dan controller secara bersamaan dengan menuliskan perintah di terminal, "php artisan make:model -cr Employee"
+      note : 
+      1. perintah -cr akan memberitahukan laravel untuk sekaligus membuat model, controller bersama kerangka function crud di dalam controller
+      2. Dengan kita menuliskan nama model dengan bentuk singular/tunggal dari tabel kita, maka kita tidak perlu mendeklarasikan di dalam model tentang untuk tabel mana model tersebut diperuntukkan. Laravel sudah mengetahui hal tersebut
+   b. Deklarasikan route di web.php menggunakan 1 kalimat perintah, yakni : Route::resource('employee', EmployeeController::class);
+      note : kalimat Route:resource memberitahu laravel bahwa ini berisi dari beberapa route, seperti : index, create, store, edit, update, show, delete    (Source:https://laravel.com/docs/8.x/controllers).
+   c. Menuliskan kalimat perintah di model yang memberitahu laravel bahwa beberapa kolom di tabel dapat di manipulasi datanya (App\Model\Employee.php)
+   e. Mengisi setiap function yang terdapat pada EmployeeController (App\Http\Controllers\EmployeeController.php)
+5. Proses Pembuatan Frontend
+   a. Buat Layouting (resource\views\layouts dan resource\views\includes)
+   b. Membuat tampilan CRUD.
+      Note: dalam case ini saya menggabungkan form create di file tampilan tabel (pages\employee\index.blade.php) dengan menggunakan modal
+      
+Sekian dari ilmu sedikit yang dapat saya bagikan tentang membuat CRUD Laravel 8 secara fullstack dalam waktu kurang dari 1 jam. Bila ada kebingungan dalam penulisan kode saya, feel free untuk berdiskusi di bawah. Oiya, untuk mendukung kecepatan kita dalam menyelesaikan task, biasanya saya juga menggunakan beberapa plugin yang tersedia di Visual Studio Code. Apa-apa saja plugin yang saya gunakan? In syaa Allah akan saya bagikan di next post. See you  
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+   
